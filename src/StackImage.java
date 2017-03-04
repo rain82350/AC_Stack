@@ -22,6 +22,7 @@ public class StackImage {
 	ArrayList<Integer> pixelArrList4 = new ArrayList<Integer>();
 	ArrayList<Integer> waterValue = new ArrayList<Integer>();
 	ArrayList<Integer> checkValue = new ArrayList<Integer>();
+	////////////
 	ArrayList<Integer> stack24Value = new ArrayList<Integer>();
 	private BufferedWriter fw = null;
 	private BufferedWriter fw2 = null;
@@ -434,6 +435,9 @@ public class StackImage {
 			}
 		}
 
+	}
+	public ArrayList<Integer> getStack24Valu() {
+		return this.stack24Value;
 	}
 
 	public void stack3Subimage() {

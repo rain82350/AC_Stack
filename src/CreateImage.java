@@ -1,6 +1,8 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
@@ -11,7 +13,6 @@ public class CreateImage {
 
 	public static void main(String[] args) {
 		int ctr = 0;
-		// int[] stegoPixel1 = new int[256 * 256];
 
 		for (int i = 0; i < 64; i++) {
 			for (int j = 0; j < 64; j++) {
@@ -32,10 +33,23 @@ public class CreateImage {
 		}
 		System.out.println("Origin Image OK.");
 
-		Draw(stegoImage1, 56);
+		Scanner sc = new Scanner(System.in);
+		int[] blockPosition = new int[32];
+		int blocknumber = 32;
+
+		for (int i = 0; i < blocknumber; i++) {
+			System.out.print("Input a integer number: ");
+			blockPosition[i] = sc.nextInt();
+		}
+		Arrays.sort(blockPosition);
+		for (int i = 0; i < blocknumber; i++) {
+			System.out.print(blockPosition[i] + " ");
+		}
+
+		Draw(stegoImage1, blockPosition);
 
 		try {
-			File ls = new File("SubImgTestAfter.png");
+			File ls = new File("SubImg24Position.png");
 			ImageIO.write(stegoImage1, "png", ls);
 			stegoImage1.flush();
 		} catch (IOException e) {
@@ -44,43 +58,41 @@ public class CreateImage {
 		System.out.println("After Image OK.");
 	}
 
-	private static void Draw(BufferedImage img, int t) {
+	private static void Draw(BufferedImage img, int[] t) {
 
 		int x = 0;
 		int y = 0;
 		int i = 0;
 		int j = 0;
 
-//		y = j + 32 * t;
-		y = 32 * (t%8);
-		if (0 <= t && t <= 7) {
-			x = 0;
-		} else if (8 <= t && t <= 15) {
-			x = 32;
-		} else if (16 <= t && t <= 23) {
-			x = 64;
-		} else if (24 <= t && t <= 31) {
-			x = 96;
-		} else if (32 <= t && t <= 39) {
-			x = 128;
-		} else if (40 <= t && t <= 47) {
-			x = 160;
-		} else if (48 <= t && t <= 55) {
-			x = 192;
-		} else if (56 <= t && t <= 63) {
-			x = 224;
+		for (int p = 0; p < t.length; p++) {
+			y = 32 * (t[p] % 8);
+			if (0 <= t[p] && t[p] <= 7) {
+				x = 0;
+			} else if (8 <= t[p] && t[p] <= 15) {
+				x = 32;
+			} else if (16 <= t[p] && t[p] <= 23) {
+				x = 64;
+			} else if (24 <= t[p] && t[p] <= 31) {
+				x = 96;
+			} else if (32 <= t[p] && t[p] <= 39) {
+				x = 128;
+			} else if (40 <= t[p] && t[p] <= 47) {
+				x = 160;
+			} else if (48 <= t[p] && t[p] <= 55) {
+				x = 192;
+			} else if (56 <= t[p] && t[p] <= 63) {
+				x = 224;
+			}
+			for (i = 0; i < 32; i++) {
+				for (j = y; j < y + 32; j++) {
+					img.setRGB(j, x, (0xff000000 | (255 << 16) | (255 << 8 | 255)));
+
+				}
+				x++;
+			}
 		}
 		
-		for (i = 0; i < 32; i++) {
-			for (j = y; j < y+32; j++) {
-				img.setRGB(j, x, (0xff000000 | (255 << 16) | (255 << 8 | 255)));
-				
-//				if (i == 31) {
-//					y++;
-//				}
-			}
-			x ++;
-		}
 
 		System.out.println("Draw OK! ");
 	}
