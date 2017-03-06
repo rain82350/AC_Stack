@@ -358,8 +358,8 @@ public class StackImage {
 		// }
 		System.out.println("WaterV1ArrList Size: " + waterValue1.size());
 		System.out.println("WaterV1ArrList Size: " + waterValue2.size());
+		
 		// Lagrange method
-
 		int x = 0;
 		int sub1V = 0;
 		int m = 251;
@@ -442,6 +442,116 @@ public class StackImage {
 
 	public void stack3Subimage() {
 
+		int[] b1 = new int[10];
+		int[] b2 = new int[10];
+		int[] b3 = new int[10];
+		String[] b1_str = new String[10];
+		String[] b2_str = new String[10];
+		String[] b3_str = new String[10];
+		String waterV1 = "";
+		String waterV2 = "";
+		String waterV3 = "";
+		ArrayList<Integer> waterValue1 = new ArrayList<Integer>();
+		ArrayList<Integer> waterValue2 = new ArrayList<Integer>();
+		ArrayList<Integer> waterValue3 = new ArrayList<Integer>();
+		int count = 0;
+		int count2 = 16384;
+		int b = 1;
+		int i = 0;
+		int ii = 0;
+
+		File file1 = new File("waterV_1.txt");
+		File file2 = new File("waterV_2.txt");
+		File file3 = new File("waterV_3.txt");
+
+		this.getGrayPixel();
+		this.getGrayPixel2();
+		this.getGrayPixel3();
+		while (count < (54620 - 1)) {
+			waterV1 = "";
+			waterV2 = "";
+			waterV3 = "";
+			for (i = 0; i < 10; i++) {
+				b1[i] = this.pixelArrList1.get(count2);
+				b2[i] = this.pixelArrList2.get(count2);
+				b3[i] = this.pixelArrList3.get(count2);
+				b1_str[i] = Integer.toBinaryString(b1[i]);
+				b2_str[i] = Integer.toBinaryString(b2[i]);
+				b3_str[i] = Integer.toBinaryString(b3[i]);
+
+				if (b1_str[i].length() < 8 || b2_str[i].length() < 8 || b3_str[i].length() < 8) {
+					while (b1_str[i].length() < 8) {
+						StringBuffer sb = new StringBuffer();
+						sb.append("0").append(b1_str[i]);// ¥ª¸É0
+						b1_str[i] = sb.toString();
+					}
+					while (b2_str[i].length() < 8) {
+						StringBuffer sb = new StringBuffer();
+						sb.append("0").append(b2_str[i]);// ¥ª¸É0
+						b2_str[i] = sb.toString();
+					}
+					while (b3_str[i].length() < 8) {
+						StringBuffer sb = new StringBuffer();
+						sb.append("0").append(b3_str[i]);// ¥ª¸É0
+						b3_str[i] = sb.toString();
+					}
+				}
+//				 System.out.println("ArrList1TempV" + i + " : " + b1[i]);
+//				 System.out.println("ArrList2TempV" + i + " : " + b2[i]);
+//				 System.out.println("ArrList3TempV" + i + " : " + b3[i]);
+				// System.out.println("ArrList1TempSTR" + i + " : " +
+				// b1_str[i]);
+				// System.out.println("ArrList2TempSTR" + i + " : " +
+				// b2_str[i]);
+//				 System.out.println("ArrList3TempSTR" + i + " : " +
+//							 b3_str[i]);
+				 
+				if (i < 8) {
+					waterV1 = waterV1.concat(b1_str[i].charAt(7) + "");
+					waterV2 = waterV2.concat(b2_str[i].charAt(7) + "");
+					waterV3 = waterV3.concat(b3_str[i].charAt(7) + "");
+//					 System.out.println("WaterVale1: " + waterV1);
+//					 System.out.println("WaterVale2: " + waterV2);
+//					 System.out.println("WaterVale3: " + waterV3);
+				}
+				count++;
+				count2++;
+			}
+//			 System.out.println("WaterDEC1: " + Integer.valueOf(waterV1, 2));
+//			 System.out.println("WaterDEC2: " + Integer.valueOf(waterV2, 2));
+//			 System.out.println("WaterDEC3: " + Integer.valueOf(waterV3, 2));
+			waterValue1.add(Integer.valueOf(waterV1, 2));
+			waterValue2.add(Integer.valueOf(waterV2, 2));
+			waterValue3.add(Integer.valueOf(waterV3, 2));
+//			 try {
+//			 String charSp = Integer.toString(waterValue3.get(ii));
+//			 fw = new BufferedWriter(new OutputStreamWriter(
+//			 new FileOutputStream(file3, true), "UTF-8"));
+//			 fw.append(charSp);
+//			 fw.append(", ");
+//			 fw.flush();
+//			
+//			
+//			
+//			 } catch (Exception e) {
+//			 e.printStackTrace();
+//			 }
+//			 ii++;
+
+			// System.out.println("Round " + b + " OK!");
+			// b++;
+			// count = count + 10;
+		}
+//		 if (fw != null) {
+//		 try {
+//		 fw.close();
+//		 } catch (Exception e) {
+//		 e.printStackTrace();
+//		 }
+//		 }
+		System.out.println("WaterV1ArrList Size: " + waterValue1.size());
+		System.out.println("WaterV2ArrList Size: " + waterValue2.size());
+		System.out.println("WaterV3ArrList Size: " + waterValue3.size());
 	}
 
 	public void stack4Subimage() {

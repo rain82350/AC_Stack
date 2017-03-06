@@ -23,23 +23,25 @@ public class StackingMain {
 
 		ArrayList<Integer> waterValue24 = new ArrayList<Integer>();
 
-		StackImage stacktest = new StackImage(subImage1, subImage2);
+//		StackImage stacktest = new StackImage(subImage1, subImage2);
 
-		waterValue24 = stacktest.getStack24Valu();
+//		waterValue24 = stacktest.getStack24Valu();
 
-		String imgName = "SubImg24Position.png";
-		int[][] pixel = new int[256][256];
-
-		Stack24(imgName, waterValue24);
-
-		try {
-			File ls = new File("SubImg1.png");
-			ImageIO.write(stack24Image, "png", ls);
-			stack24Image.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("SubImg1 OK.");
+//		String imgName = "SubImg24Position.png";
+//		int[][] pixel = new int[256][256];
+//
+//		Stack24(imgName, waterValue24);
+//
+//		try {
+//			File ls = new File("SubImg1.png");
+//			ImageIO.write(stack24Image, "png", ls);
+//			stack24Image.flush();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println("SubImg1 OK.");
+		
+		StackImage stacktest2 = new StackImage(subImage1, subImage2, subImage3);
 
 	}
 
@@ -76,15 +78,18 @@ section:{
 										(0xff000000 | (waterValue24.get(count) << 16) | (waterValue24
 												.get(count) << 8 | waterValue24
 												.get(count))));
+						count++;
 						
 					}
-					count++;
+					
 					if(count>=waterValue24.size()) break section;
 					// System.out.printf( pixel[i][j] + "  ");
 				}
 				// System.out.println("");
 			}
-		}		
+		}	
+		
+		System.out.println("WaterValue size: "+waterValue24.size());
 		
 	}
 }
